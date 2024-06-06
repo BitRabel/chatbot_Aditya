@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+      body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #4ed2e9;
+    background-image: url('\Images.jpg'); /* Replace 'images/your-image.jpg' with the path to your image */
+    background-size: cover;
+    background-position: center;
+        }
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .chat-box {
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .user-message {
+            margin-bottom: 5px;
+        }
+        .bot-message {
+            margin-bottom: 5px;
+            text-align: right;
+        }
+        input[type="text"] {
+            width: calc(100% - 50px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="chat-box" id="chat-box"></div>
+        <form id="chat-form">
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <input type="submit" value="Send">
+        </form>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+
+        chatForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const userMessage = userInput.value.trim();
+            if (userMessage !== '') {
+                displayMessage('User', userMessage);
+                getBotResponse(userMessage);
+                userInput.value = '';
+            }
+        });
+
+        function displayMessage(sender, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = `${sender}: ${message}`;
+            messageDiv.classList.add(`${sender.toLowerCase()}-message`);
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function getBotResponse(userMessage) {
+    let botResponse;
+    userMessage = userMessage.toLowerCase(); // Convert user message to lowercase for easier comparison
+
+    if (userMessage.includes('hello')) {
+        botResponse = 'Hello! How can I assist you today?';
+    } else if (userMessage.includes('bye')) {
+        botResponse = "Goodbye! Have a great day!";
+    } else if (userMessage.includes('joke')) {
+        botResponse = "Why don't scientists trust atoms? Because they make up everything!";
+    } else if (userMessage.includes('fact')) {
+        botResponse = "The shortest war in history was between Britain and Zanzibar on August 27, 1896. Zanzibar surrendered after 38 minutes.";
+    } else if (userMessage.includes('quote')) {
+        botResponse = "The only way to do great work is to love what you do. - Steve Jobs";
+    } else if (userMessage.includes('riddle')) {
+        botResponse = "What has keys but can't open locks? A piano!";
+    } else if (userMessage.includes('math')) {
+        botResponse = "2 + 2 = 4";
+    } else if (userMessage.includes('news')) {
+        botResponse = " Latest News Today Live Updates June 6, 2024: When Narendra Modi calls WHO chief 'Tulsi Bhai' in thank you reply";
+    } else if (userMessage.includes('music')) {
+        botResponse = "TURUK TURUK TARRA";
+    } else if (userMessage.includes('recipe')) {
+        botResponse = "For sahi paneer Masala.";
+    } else if (userMessage.includes('movie')) {
+        botResponse = "I'm sorry, I don't have access to movie information.";
+    } else {
+        botResponse = "I'm sorry, I didn't understand that.";
+    }
+    displayMessage('Bot', botResponse);
+
+        }
+    </script>
+</body>
+</html>
